@@ -28,9 +28,6 @@
 
         public function credit($montant){
             $this->_soldeIn =$this->_soldeIn+$montant;
-    
-            // $this->_solde += $montant;
-    
             return $this->_soldeIn;
         }
 
@@ -38,10 +35,8 @@
             $this->_soldeIn =$this->_soldeIn-$retrait;
             return $this->_soldeIn;
         }
-        // public function virement($virement){}
-        // public function virement($virement){
-        //     $this->_solde
-        // }
+       
+        
             
         public function getDevise (){
             return $this ->_devise;
@@ -65,6 +60,18 @@
 
         public function setTitulaireDeCompte (){
             return $this ->_soldeTitulaireDeCompte;
+        }
+        
+        
+        public function virement($compte, $montant){
+            // on débite le compte source de $montant à partir duquel on effectue le virement
+
+            $this -> debit ($montant);
+
+            // on crédite le compte cible du même montant
+
+            $compte -> credit ($montant);
+
         }
         
         public function __toString () {
